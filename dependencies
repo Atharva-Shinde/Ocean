@@ -7,3 +7,9 @@ ethers
 @nomiclabs/hardhat-waffle 
 @nomiclabs/hardhat-ethers
 ethereum-waffle
+
+
+technologies used
+metamask => to create personal ethereum wallet
+faucet.egorfine.com => to gain test ethereum which is needed to deploy smart contracts
+alchemy.com => to deploy the smart contract
