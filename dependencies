@@ -4,7 +4,7 @@ hardhat
 ethereum-waffle
 chai
 ethers
-@nomiclabs/hardhat-waffle 
+@nomiclabs/hardhat-waffle => a plugin to build smart contract tests
 @nomiclabs/hardhat-ethers
 ethereum-waffle
 
