@@ -1,3 +1,5 @@
+// this file serves purpose of deploying the smart contract 
+
 const main = async () => {
   // Hardhat always runs the compile task when running scripts with its command
   // line interface.
@@ -26,3 +28,6 @@ const runMain = async () =>{
 }
 
 runMain();
+
+// the smart contract is deployed to address: 0x98a4b1E5B64C2a5Da49458C42079737C0B933b86
+// connect this to client side by constant.js
