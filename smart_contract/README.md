@@ -10,6 +10,6 @@ npx hardhat compile
 npx hardhat clean
 npx hardhat test
 npx hardhat node
-node scripts/sample-script.js
 npx hardhat help
+node scripts/Deploy.js --network ropsten  # to deploy the smart contract on ropsten network
 ```
