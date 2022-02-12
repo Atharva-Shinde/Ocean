@@ -1,3 +1,5 @@
+// this is the Solidity smart contract 
+
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.0;
 
