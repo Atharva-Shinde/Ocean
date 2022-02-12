@@ -1,21 +1,17 @@
-require("@nomiclabs/hardhat-waffle");
+// this file is for configuring the network and deployment of smart contract 
 
-// This is a sample Hardhat task. To learn how to create your own go to
-// https://hardhat.org/guides/create-task.html
-task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
-  const accounts = await hre.ethers.getSigners();
+// hardhat-waffle is used for building smart contract tests 
+require('@nomiclabs/hardhat-waffle');
 
-  for (const account of accounts) {
-    console.log(account.address);
+module.exports ={
+  solidity: "0.8.0",
+  // this is the test network known as Ropsten I signed up on alchemy.com which deploys our smart contract 
+  networks: {
+    ropsten: {
+      // this is the view key of Ocean app on which the smart contract is to be deployed 
+      url: 'https://eth-ropsten.alchemyapi.io/v2/s1EdhTk2pwpeeodg-LfQ5aDmzA-r9XdF',
+      // this👇 accounts value is my private key of my metamask account 
+      accounts:['ee9455279433d0ec32d558a1cb3f033bcc0af73cb88b59742cc44d213022b24c']
+    }
   }
-});
-
-// You need to export an object to set up your config
-// Go to https://hardhat.org/config/ to learn more
-
-/**
- * @type import('hardhat/config').HardhatUserConfig
- */
-module.exports = {
-  solidity: "0.8.4",
-};
+}
