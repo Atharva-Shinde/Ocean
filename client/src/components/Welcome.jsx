@@ -1,6 +1,8 @@
+import React, {useContext} from 'react';
 import { AiFillPlayCircle } from "react-icons/ai";
 import {SiEthereum} from "react-icons/ai";
 import {BsInfoCircle} from "react-icons/ai";
+import { TransactionContext} from '../context/TransactionContext';
 import {Loader} from './';
 
 const Input = ({type, placeholder, name}) => (
@@ -17,10 +19,8 @@ const Input = ({type, placeholder, name}) => (
 const gridStyle = "flex justify-center items-center border-[0.5px] p-3";
 
 const Welcome = () =>{
-
-    const connectWallet = () =>{
-
-    }
+    // to transfer the value of the context created inside TransactionContext.jsx under the name TransactionContext
+    const {connectWallet} = useContext(TransactionContext);
 
     const handleSubmit =() =>{
         
@@ -31,20 +31,21 @@ const Welcome = () =>{
             <div className="flex mf:flex-row flex-col items-start justify-between md:p-20 py-12 px-4">
                 <div className="flex flex-1 justify-start items-start flex-col">
                     <h1 className="text-3xl sm:text-5xl text-white text-gradient py-1">
-                        Send Crypto <br /> across the world
+                        Send Crypto <br /> to your loved ones
                     </h1>
                     <p className="text-left mt-5 text-white font-light md:w-9/12 w-11/12 text-base">
                     Explore the crypto world. Buy and sell cryptocurrencies easily on Krypto.
                     </p>
+                    {/* connectWallet is a function that checks if the user has an metamask account and if yes it connects this app to users metamask wallet  */}
                     <button onClick={connectWallet} className="flex flex-row justify-center items-center my-5 bg-[#2952e3] p-3 rounded-full cursor-pointer hover:bg-[#2546bd] " type="button">
-                        <p className="text-white text-base font-semibold">Invest Now</p>
+                        <p className="text-white text-base font-semibold">Connect My Wallet</p>
                     </button>
 
                     <div className="grid  sm:grid-cols-3 grid-cols-2 w-full mt-10">
                         <div className={`text-white rounded-tl-2xl ${gridStyle}`}>Secure</div>
                         <div className={`text-white ${gridStyle}`}>Reliable</div>
-                        <div className={`text-white rounded-tr-2xl ${gridStyle}`}>Monitored</div>
-                        <div className={`text-white rounded-bl-2xl ${gridStyle}`}>Configured</div>
+                        <div className={`text-white ${gridStyle}`}>Monitored</div>
+                        <div className={`text-white ${gridStyle}`}>Configured</div>
                         <div className={`text-white ${gridStyle}`}>Decentralised</div>
                         <div className={`text-white rounded-br-2xl ${gridStyle}`}>easy to use</div>       
                     </div>
