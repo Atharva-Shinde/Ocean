@@ -25,40 +25,52 @@ const getEthereumContract = () => {
 }
 
 export const TransactionProvider = ({children}) => {
-    const [CurrentAccount, setCurrentAccount] = useState("")
+    const [currentAccount, setCurrentAccount] = useState("")
 
     const checkIfWalletIsConnected = async() => {
         //👇 if no ethereum object i.e no metamask ethereum account is found 
-        if(!ethereum) return alert("please install metamask extension to connect the application to your wallet");
-        //👇 this gives an array of your metamask account if present and if not gives the above error
+        if(!ethereum) return alert("please install metamask extension to connect your wallet to the application ");
+        //👇 this gives an array of your metamask account if present and if not logs a null array and displays the above error
         const accounts = await ethereum.request({method: 'eth_accounts'});
         console.log(accounts); 
     }
 
     const connectWallet = async() => {
         try {
-            // this makes a request to metamask to connect to ethereum wallet account 
+            // this makes a request to metamask to connect to your metamask wallet account 
             // and thus opens the metamaskk extension
             const accounts = await ethereum.request({method:'eth_requestAccounts'})
-            // if an account/s are found, the first account is considered and user is prompted to connect it with MetaMask 
+            // if account/s are found, the first account is considered and user is prompted to connect it with MetaMask 
             setCurrentAccount(accounts[0]);
-        } catch (error) {
-            throw alert("Install metamask extension and configure your wallet")
-        }
+            // console.log(accounts);
 
+        } catch (error) {
+            throw new Error("Connect your metamask wallet to send Ethereum from your account")
+        }
+    }
+
+    const sendTransaction = () =>{
+        try {
+            if(!ethereum) return alert("please install metamask extension to connect your wallet to the application ")
+            
+        } catch (error) {
+            throw new Error("Unexpected error occured");
+        }
     }
 
     // to call the checkIfWalletIsConnected function at the initial render of the applicaiton
     useEffect(() =>{
         checkIfWalletIsConnected();
+        getEthereumContract();
+        connectWallet();
     },[])
-    // 👆the empty array here means the funciton ishould only be run ln the first render of the application 
+    // 👆the empty array here means that funcitons should only be run ln the first render of the application 
 
     return(
         //TransactionContext.Provider here is declared to help in defining what ("context") we need to define
         // we provide what we need to give access to inside "value={{}}"
-        <TransactionContext.Provider value={{connectWallet: connectWallet}}>
+        <TransactionContext.Provider value={{connectWallet, currentAccount}}>
             {children}
         </TransactionContext.Provider>
-    )
-}
+    );
+};
