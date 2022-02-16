@@ -20,7 +20,7 @@ const gridStyle = "flex justify-center items-center border-[0.5px] p-3";
 
 const Welcome = () =>{
     // to transfer the value of the context created inside TransactionContext.jsx under the name TransactionContext
-    const {connectWallet} = useContext(TransactionContext);
+    const {connectWallet, currentAccount} = useContext(TransactionContext);
 
     const handleSubmit =() =>{
         
@@ -34,12 +34,16 @@ const Welcome = () =>{
                         Send Crypto <br /> to your loved ones
                     </h1>
                     <p className="text-left mt-5 text-white font-light md:w-9/12 w-11/12 text-base">
-                    Explore the crypto world. Buy and sell cryptocurrencies easily on Krypto.
+                    Explore the crypto world. Buy and sell cryptocurrencies easily on Ocean.
                     </p>
-                    {/* connectWallet is a function that checks if the user has an metamask account and if yes it connects this app to users metamask wallet  */}
-                    <button onClick={connectWallet} className="flex flex-row justify-center items-center my-5 bg-[#2952e3] p-3 rounded-full cursor-pointer hover:bg-[#2546bd] " type="button">
+                     {/* if account isn't connnected then display the button */}
+                    {!currentAccount && (
+                        // connectWallet is a function that checks if the user has an metamask account and if yes it connects this app to users metamask wallet                  
+                        <button onClick={connectWallet} className="flex flex-row justify-center items-center my-5 bg-[#2952e3] p-3 rounded-full cursor-pointer hover:bg-[#2546bd] " type="button">
                         <p className="text-white text-base font-semibold">Connect My Wallet</p>
-                    </button>
+                        </button>)
+                    }
+                    
 
                     <div className="grid  sm:grid-cols-3 grid-cols-2 w-full mt-10">
                         <div className={`text-white rounded-tl-2xl ${gridStyle}`}>Secure</div>
@@ -53,7 +57,7 @@ const Welcome = () =>{
             </div>
             <div className="flex flex-col flex-1 items-center justify-start w-full md:mt-0 mt-10">
                 <div className="p-3 justify-end items-start flex-col rounded-xl h-40 sm:w-72 my-5 eth-card white-glassmorphism">
-                    WhatQQ
+                    Ethereum
                 </div>
                 {/* form 👇 */}
                 <div className="p-5 sm:w-96 w-full flex flex-col justify-start items-center blue-glassmorphism ">
