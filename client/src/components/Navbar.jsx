@@ -4,13 +4,11 @@ import {HiMenuAlt4} from 'react-icons/hi';
 import {AiOutlineClose} from 'react-icons/ai';
 // import {logo} from '../../public/logo192.png';
 
-const NavBarItem =({title,classProps}) =>{
-    return (
+const NavBarItem =({title,classProps}) => (
         <li className={`mx-4 cursor-pointer ${classProps}`}>
             {title}
         </li>
-    )
-}
+);
 
 const Navbar = () =>{
     // this👇 state is used to see if mobile menu is toggled
@@ -32,8 +30,9 @@ const Navbar = () =>{
                     {toggleMenu?<AiOutlineClose fontSize={28} className="text-white md:hidden cursor-pointer"onClick={() => setToggleMenu(false)}/>:<HiMenuAlt4 fontSize={28} className="text-white md:hidden cursor-pointer"onClick={() => setToggleMenu(true)}/>}
                     {toggleMenu &&(
                         <ul className='z-10 fixed top-0 -right-2 p-3 w-[70vw] h-screen flex flex-col justify-start items-end blue-glassmorphism text-white'>
-                            {["Market","Exchange", "Tutorials", "Wallets"].map((item)=>(
-                                <NavBarItem title={item} classProps="my-2 text-lg"/>
+                            {["Market","Exchange", "Tutorials", "Wallets"].map((item, index)=>(
+                                // the key helps React to identify which items have changed, are added, or are removed
+                                <NavBarItem key={item+index} title={item} classProps="my-2 text-lg"/>
                             ))}
                         </ul>
                     )}
