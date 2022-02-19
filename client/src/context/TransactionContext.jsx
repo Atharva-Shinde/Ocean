@@ -30,7 +30,7 @@ export const TransactionProvider = ({children}) => {
     const checkIfWalletIsConnected = async() => {
         //👇 if no ethereum object i.e no metamask ethereum account is found 
         if(!ethereum) return alert("please install metamask extension to connect your wallet to the application ");
-        //👇 this gives an array of your metamask account if present and if not logs a null array and displays the above error
+        //👇 this gives an array list of users metamask account if present and if not logs a null array and displays the above error
         const accounts = await ethereum.request({method: 'eth_accounts'});
         console.log(accounts); 
     }
@@ -42,10 +42,10 @@ export const TransactionProvider = ({children}) => {
             const accounts = await ethereum.request({method:'eth_requestAccounts'})
             // if account/s are found, the first account is considered and user is prompted to connect it with MetaMask 
             setCurrentAccount(accounts[0]);
-            // console.log(accounts);
+            console.log(accounts);
 
         } catch (error) {
-            throw new Error("Connect your metamask wallet to send Ethereum from your account")
+            throw alert("Connect your metamask wallet to send Ethereum from your account")
         }
     }
 
@@ -62,7 +62,6 @@ export const TransactionProvider = ({children}) => {
     useEffect(() =>{
         checkIfWalletIsConnected();
         getEthereumContract();
-        connectWallet();
     },[])
     // 👆the empty array here means that funcitons should only be run ln the first render of the application 
 
