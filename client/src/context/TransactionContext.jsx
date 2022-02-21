@@ -10,7 +10,7 @@ export const TransactionContext = React.createContext();
 //this is accessible because of the installed metamask wallet
 const {ethereum} = window;
 
-// this function detects our metamask ethereum provider and gets information of our deployed smartcontract
+// this function detects our metamask ethereum provider and gets information of our deployed smartcontract on blockchain
 const getEthereumContract = () => {
     const provider = new ethers.providers.Web3Provider(ethereum);
     const signer = provider.getSigner();
