@@ -1,5 +1,5 @@
 # Ocean
-A Web 3.0 Blockchain application
+A Web 3.0 Blockchain application (in progress)
 
 ## General display of the website:
 <img width="1087" alt="Screenshot 2022-02-20 at 11 04 31 PM" src="https://user-images.githubusercontent.com/69111235/154856122-03618f28-6aba-43be-94d9-282aac5e23eb.png">
