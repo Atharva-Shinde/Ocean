@@ -5,13 +5,14 @@ import {BsInfoCircle} from "react-icons/ai";
 import { TransactionContext} from '../context/TransactionContext';
 import {Loader} from './';
 
-const Input = ({type, placeholder, name, handleChange}) => (
+const Input = ({type, placeholder, value, name, handleChange}) => (
     <input 
         type={type}
         placeholder={placeholder}
         onChange={(e) => handleChange(e, name)}
         // this👇 makes the amount start from 0.0001 rather than 1,2 etc.. 
         step="0.0001"
+        value={value}
         className="my-2 bg-transparent outline-none text-sm text-white border-none"
     />
 );
@@ -65,9 +66,9 @@ const Welcome = () =>{
                 </div>
                 {/* form 👇 */}
                 <div className="p-5 sm:w-96 w-full flex flex-col justify-start items-center blue-glassmorphism ">
-                    <Input type="email" placeholder="AddressTo" name="addressTo" handleChange={handleChange}/>
+                    <Input type="text" placeholder="AddressTo" name="addressTo" handleChange={handleChange}/>
                     <Input type="number" placeholder="Amount" name="amount" handleChange={handleChange}/>
-                    <Input type="email" placeholder="Keyword" name="keyword" handleChange={handleChange}/>
+                    <Input type="text" placeholder="Keyword" name="keyword" handleChange={handleChange}/>
                     <Input type="text" placeholder="Enter message" name="message" handleChange={handleChange}/>
                     {/* <div className="h-[1px] w-full bg-gray-400 my-2"> */}
                     <button type="button" onClick={handleSubmit} className="text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] rounded-full cursor-pointer">Send Now</button>

@@ -33,7 +33,8 @@ export const TransactionProvider = ({children}) => {
         if(!ethereum) return alert("please install metamask extension to connect your wallet to the application ");
         //👇 this gives an array list of users metamask account if present and if not logs a null array and displays the above error
         const accounts = await ethereum.request({method: 'eth_accounts'});
-        // console.log(accounts); 
+        setCurrentAccount(accounts[0]);
+        console.log(accounts); 
     }
 
     const connectWallet = async() => {
@@ -45,19 +46,21 @@ export const TransactionProvider = ({children}) => {
             setCurrentAccount(accounts[0]);
             // console.log(accounts);
 
-        } catch (error) {
+        } 
+        catch (error) {
             throw alert("Connect your metamask wallet to send Ethereum from your account")
         }
     }
 
     const sendTransaction = async () =>{
         try {
-            if(!ethereum) return alert("please install metamask extension to connect your wallet to the application ")
-            const transactionContract =getEthereumContract();
+            if(ethereum) {
 
+            const transactionContract =getEthereumContract();
             const {addressTo, amount, keyword,message} = formData;
-            // we need to convert the amount passed for eg: 0.0001 Eth to hexadecimal or GWEI number to get recognised by blockchain
-            const parsedAmount =ethers.utils.parseEther(amount);
+            // to convert the amount passed for eg: 0.0001 Eth to hexadecimal or GWEI number to get recognised by blockchain
+            const parsedAmount = ethers.utils.parseEther(amount);
+
             console.log(formData);
 
             await ethereum.request({
@@ -67,24 +70,25 @@ export const TransactionProvider = ({children}) => {
                     to: addressTo,
                     gas:'0x5208',
                     value: parsedAmount._hex,
-
-                }]
+                }],
             });
             // addToBlockchain is the function from solidity contract -> Transactions.sol which stores the transactions to blockchain
-            const transactionHash = await transactionContract.addToBlockchain(addressTo, amount, keyword, message);
+            const transactionHash = await transactionContract.addToBlockchain(addressTo, parsedAmount, keyword, message);
             console.log(transactionHash);
+            window.location.reload();
 
+        }
         } catch (error) {
             console.log(error);
             throw new Error("Unexpected error occured");
         }
-    }
+    };
 
     // to call the checkIfWalletIsConnected function at the initial render of the applicaiton
     useEffect(() =>{
         checkIfWalletIsConnected();
     },[])
-    // 👆the empty array here means that funcitons should only be run ln the first render of the application 
+    // 👆the empty array here means that the functions should only be run for the first render of the application 
 
     return(
         //TransactionContext.Provider here is declared to help in defining what ("context") we need to define
