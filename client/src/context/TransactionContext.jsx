@@ -52,37 +52,37 @@ export const TransactionProvider = ({children}) => {
         }
     }
 
-    const sendTransaction = async () =>{
-        try {
-            if(ethereum) {
+    // const sendTransaction = async () =>{
+    //     try {
+    //         if(ethereum) {
 
-            const transactionContract =getEthereumContract();
-            const {addressTo, amount, keyword,message} = formData;
-            // to convert the amount passed for eg: 0.0001 Eth to hexadecimal or GWEI number to get recognised by blockchain
-            const parsedAmount = ethers.utils.parseEther(amount);
+    //         const transactionContract =getEthereumContract();
+    //         const {addressTo, amount, keyword,message} = formData;
+    //         // to convert the amount passed for eg: 0.0001 Eth to hexadecimal or GWEI number to get recognised by blockchain
+    //         const parsedAmount = ethers.utils.parseEther(amount);
 
-            console.log(formData);
+    //         console.log(formData);
 
-            await ethereum.request({
-                method:'eth_sendTransaction', 
-                params:[{
-                    from: currentAccount,
-                    to: addressTo,
-                    gas:'0x5208',
-                    value: parsedAmount._hex,
-                }],
-            });
-            // addToBlockchain is the function from solidity contract -> Transactions.sol which stores the transactions to blockchain
-            const transactionHash = await transactionContract.addToBlockchain(addressTo, parsedAmount, keyword, message);
-            console.log(transactionHash);
-            window.location.reload();
+    //         await ethereum.request({
+    //             method:'eth_sendTransaction', 
+    //             params:[{
+    //                 from: currentAccount,
+    //                 to: addressTo,
+    //                 gas:'0x5208',
+    //                 value: parsedAmount._hex,
+    //             }],
+    //         });
+    //         // addToBlockchain is the function from solidity contract -> Transactions.sol which stores the transactions to blockchain
+    //         const transactionHash = await transactionContract.addToBlockchain(addressTo, parsedAmount, keyword, message);
+    //         console.log(transactionHash);
+    //         window.location.reload();
 
-        }
-        } catch (error) {
-            console.log(error);
-            throw new Error("Unexpected error occured");
-        }
-    };
+    //     }
+    //     } catch (error) {
+    //         console.log(error);
+    //         throw new Error("Unexpected error occured");
+    //     }
+    // };
 
     // to call the checkIfWalletIsConnected function at the initial render of the applicaiton
     useEffect(() =>{
@@ -93,7 +93,8 @@ export const TransactionProvider = ({children}) => {
     return(
         //TransactionContext.Provider here is declared to help in defining what ("context") we need to define
         // we provide what we need to give access to inside "value={{}}"
-        <TransactionContext.Provider value={{connectWallet, currentAccount, formData, handleChange, sendTransaction}}>
+        // add sendTransaction here 
+        <TransactionContext.Provider value={{connectWallet, currentAccount, formData, handleChange}}>
             {children}
         </TransactionContext.Provider>
     );
