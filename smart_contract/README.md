@@ -6,6 +6,7 @@ Installing dependencies:
 ```
 npm install --save-dev hardhat @nomiclabs/hardhat-waffle @nomiclabs/hardhat-ethers ethereum-waffle chai ethers
 ```
+`npx hardhat test`
 
 Try running some of the following tasks:
 
