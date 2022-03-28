@@ -2,6 +2,11 @@
 
 This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts.
 
+Installing dependencies:
+```
+npm install --save-dev hardhat @nomiclabs/hardhat-waffle @nomiclabs/hardhat-ethers ethereum-waffle chai ethers
+```
+
 Try running some of the following tasks:
 
 ```shell
