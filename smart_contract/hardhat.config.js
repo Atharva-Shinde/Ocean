@@ -5,7 +5,7 @@ require('@nomiclabs/hardhat-waffle');
 
 module.exports ={
   solidity: "0.8.0",
-  // this is the test network known as Ropsten I signed up on alchemy.com which deploys our smart contract 
+  // this is the test network known as Ropsten I signed up on alchemy.com which deploys our smart contract to Ropsten Test Network
   networks: {
     ropsten: {
       // this is the view key of Ocean app on which the smart contract is to be deployed 
