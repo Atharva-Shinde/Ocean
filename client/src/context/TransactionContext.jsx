@@ -16,7 +16,7 @@ const getEthereumContract = () => {
     const signer = provider.getSigner();
     // this👇 object contains the abstraction of code deployed on blockchain 
     const transactionContract = new ethers.Contract(contractAddress, contractABI,signer);
-
+    console.log(transactionContract);
     return transactionContract;
 }
 
@@ -53,13 +53,13 @@ export const TransactionProvider = ({children}) => {
     }
 
     const sendTransaction = async () =>{
-    //     try {
-    //         if(ethereum) {
+        try {
+            if(ethereum) {
 
-    //         const transactionContract =getEthereumContract();
-    //         const {addressTo, amount, keyword,message} = formData;
+            const transactionContract =getEthereumContract();
+            const {addressTo, amount, keyword,message} = formData;
     //         // to convert the amount passed for eg: 0.0001 Eth to hexadecimal or GWEI number to get recognised by blockchain
-    //         const parsedAmount = ethers.utils.parseEther(amount);
+            const parsedAmount = ethers.utils.parseEther(amount);
 
             console.log(formData);
 
@@ -77,16 +77,17 @@ export const TransactionProvider = ({children}) => {
     //         console.log(transactionHash);
     //         window.location.reload();
 
-    //     }
-    //     } catch (error) {
-    //         console.log(error);
-    //         throw new Error("Unexpected error occured");
-    //     }
+        }
+        } catch (error) {
+            console.log(error);
+            throw new Error("Unexpected error occured");
+        }
     };
 
     // to call the checkIfWalletIsConnected function at the initial render of the applicaiton
     useEffect(() =>{
         checkIfWalletIsConnected();
+        getEthereumContract();
     },[])
     // 👆the empty array here means that the functions should only be run for the first render of the application 
 
