@@ -52,7 +52,7 @@ export const TransactionProvider = ({children}) => {
         }
     }
 
-    // const sendTransaction = async () =>{
+    const sendTransaction = async () =>{
     //     try {
     //         if(ethereum) {
 
@@ -61,7 +61,7 @@ export const TransactionProvider = ({children}) => {
     //         // to convert the amount passed for eg: 0.0001 Eth to hexadecimal or GWEI number to get recognised by blockchain
     //         const parsedAmount = ethers.utils.parseEther(amount);
 
-    //         console.log(formData);
+            console.log(formData);
 
     //         await ethereum.request({
     //             method:'eth_sendTransaction', 
@@ -82,7 +82,7 @@ export const TransactionProvider = ({children}) => {
     //         console.log(error);
     //         throw new Error("Unexpected error occured");
     //     }
-    // };
+    };
 
     // to call the checkIfWalletIsConnected function at the initial render of the applicaiton
     useEffect(() =>{
@@ -93,8 +93,7 @@ export const TransactionProvider = ({children}) => {
     return(
         //TransactionContext.Provider here is declared to help in defining what ("context") we need to define
         // we provide what we need to give access to inside "value={{}}"
-        // add sendTransaction here 
-        <TransactionContext.Provider value={{connectWallet, currentAccount, formData, handleChange}}>
+        <TransactionContext.Provider value={{connectWallet, currentAccount, formData, handleChange, sendTransaction}}>
             {children}
         </TransactionContext.Provider>
     );

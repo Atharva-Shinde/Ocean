@@ -21,16 +21,15 @@ const gridStyle = "flex justify-center items-center border-[0.5px] p-3";
 
 const Welcome = () =>{
     // to transfer the value of the context created inside TransactionContext.jsx under the name TransactionContext
-    const {connectWallet, currentAccount, handleChange, formData} = useContext(TransactionContext);
-    // add sendTransaction above 
+    const {connectWallet, currentAccount, handleChange, formData, sendTransaction} = useContext(TransactionContext);
 
-    // const handleSubmit =(e) =>{
-    //     const {addressTo, amount, keyword, message} = formData;
-    //     e.preventDefault();
+    const handleSubmit =(e) =>{
+        const {addressTo, amount, keyword, message} = formData;
+        e.preventDefault();
 
-    //     if (!addressTo || !amount || !keyword || !message) return;
-    //     sendTransaction();
-    // }
+        if (!addressTo || !amount || !keyword || !message) return;
+        sendTransaction();
+    }
 
     return (
         <div className="flex w-full justify-center items-center">
@@ -72,8 +71,7 @@ const Welcome = () =>{
                     <Input type="text" placeholder="Keyword" name="keyword" handleChange={handleChange}/>
                     <Input type="text" placeholder="Enter message" name="message" handleChange={handleChange}/>
                     {/* <div className="h-[1px] w-full bg-gray-400 my-2"> */}
-                    {/* add handleSubmit here */}
-                    <button type="button" onClick="" className="text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] rounded-full cursor-pointer">Send Now</button>
+                    <button type="button" onClick={handleSubmit} className="text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] rounded-full cursor-pointer">Send Now</button>
                 </div>
             </div>
         </div>
