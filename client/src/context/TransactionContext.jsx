@@ -62,21 +62,18 @@ export const TransactionProvider = ({children}) => {
             const parsedAmount = ethers.utils.parseEther(amount);
 
             console.log(formData);
-
-    //         await ethereum.request({
-    //             method:'eth_sendTransaction', 
-    //             params:[{
-    //                 from: currentAccount,
-    //                 to: addressTo,
-    //                 gas:'0x5208',
-    //                 value: parsedAmount._hex,
-    //             }],
-    //         });
+            await ethereum.request({ method:'eth_sendTransaction', 
+                params:[{
+                    to: addressTo,
+                    value: parsedAmount._hex,
+                    from: currentAccount,
+                    gas:'0x5208',
+                }],
+            });
     //         // addToBlockchain is the function from solidity contract -> Transactions.sol which stores the transactions to blockchain
     //         const transactionHash = await transactionContract.addToBlockchain(addressTo, parsedAmount, keyword, message);
     //         console.log(transactionHash);
     //         window.location.reload();
-
         }
         } catch (error) {
             console.log(error);
