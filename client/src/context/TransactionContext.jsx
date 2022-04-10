@@ -16,13 +16,13 @@ const getEthereumContract = () => {
     const signer = provider.getSigner();
     // this👇 object contains the abstraction of code deployed on blockchain 
     const transactionContract = new ethers.Contract(contractAddress, contractABI,signer);
-    console.log(transactionContract);
+    console.log("TransactionContract",transactionContract);
     return transactionContract;
 }
 
 export const TransactionProvider = ({children}) => {
-    const [currentAccount, setCurrentAccount] = useState("")
-    const [formData, setFormData] = useState({addressTo:"", amount:"", keyword:"",message:""})
+    const [currentAccount, setCurrentAccount] = useState("");
+    const [formData, setFormData] = useState({addressTo:"", amount:"", keyword:"",message:""});
 
     const handleChange = (e, name) => {
         setFormData((prevState) => ({...prevState, [name]:e.target.value}));
@@ -52,13 +52,13 @@ export const TransactionProvider = ({children}) => {
         }
     }
 
-    const sendTransaction = async () =>{
+    const sendTransaction = async () => {
         try {
             if(ethereum) {
 
-            const transactionContract =getEthereumContract();
+            const transactionContract = getEthereumContract();
             const {addressTo, amount, keyword,message} = formData;
-    //         // to convert the amount passed for eg: 0.0001 Eth to hexadecimal or GWEI number to get recognised by blockchain
+            // to convert the amount passed for eg: 0.0001 Eth to hexadecimal or GWEI number to get recognised by blockchain
             const parsedAmount = ethers.utils.parseEther(amount);
 
             console.log(formData);
@@ -70,10 +70,10 @@ export const TransactionProvider = ({children}) => {
                     gas:'0x5208',
                 }],
             });
-    //         // addToBlockchain is the function from solidity contract -> Transactions.sol which stores the transactions to blockchain
-    //         const transactionHash = await transactionContract.addToBlockchain(addressTo, parsedAmount, keyword, message);
-    //         console.log(transactionHash);
-    //         window.location.reload();
+            // addToBlockchain is the function from solidity contract -> Transactions.sol which stores the transactions to blockchain
+            const transactionHash = await transactionContract.addToBlockchain(addressTo, parsedAmount, keyword, message);
+            console.log(transactionHash);
+            window.location.reload();
         }
         } catch (error) {
             console.log(error);
