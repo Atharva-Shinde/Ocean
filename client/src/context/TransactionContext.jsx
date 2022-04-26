@@ -91,7 +91,13 @@ export const TransactionProvider = ({children}) => {
     return(
         //TransactionContext.Provider here is declared to help in defining what ("context") we need to define
         // we provide what we need to give access to inside "value={{}}"
-        <TransactionContext.Provider value={{connectWallet, currentAccount, formData, handleChange, sendTransaction}}>
+        <TransactionContext.Provider value={{
+            connectWallet,
+            currentAccount,
+            formData,
+            handleChange,
+            sendTransaction
+            }}>
             {children}
         </TransactionContext.Provider>
     );
